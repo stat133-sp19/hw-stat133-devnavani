@@ -19,6 +19,13 @@ green <- read.csv("../data/draymond-green.csv", stringsAsFactors = FALSE)
 durant <- read.csv("../data/kevin-durant.csv", stringsAsFactors = FALSE)
 klay <- read.csv("../data/klay-thompson.csv", stringsAsFactors = FALSE)
 
+curry$name = "Stephen Curry"
+iggy$name = "Andre Igoudala"
+green$name = "Draymond Green"
+durant$name = "Kevin Durant"
+klay$name = "Klay Thompson"
+
+
 curry$shot_made_flag[curry$shot_made_flag == "n"] = "shot_no" 
 iggy$shot_made_flag[iggy$shot_made_flag == "n"] = "shot_no"
 green$shot_made_flag[green$shot_made_flag == "n"] = "shot_no"
