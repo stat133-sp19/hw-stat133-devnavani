@@ -1,7 +1,106 @@
 ---
-title: "Workout 01"
-author: "Dev Navani"
-date: "March 13, 2019"
+title: "The Golden State Warriors' historically great shot profile"
 output: github_document
 ---
+```{r, echo = FALSE, message = FALSE}
+library("dplyr")
+shots_data <- read.csv("../data/shots-data.csv", stringsAsFactors = FALSE)
+curry <- read.csv("../data/stephen-curry.csv", stringsAsFactors = FALSE)
+iggy <- read.csv("../data/andre-iguodala.csv", stringsAsFactors = FALSE)
+green <- read.csv("../data/draymond-green.csv", stringsAsFactors = FALSE)
+durant <- read.csv("../data/kevin-durant.csv", stringsAsFactors = FALSE)
+klay <- read.csv("../data/klay-thompson.csv", stringsAsFactors = FALSE)
 
+curry$name = "Stephen Curry"
+iggy$name = "Andre Igoudala"
+green$name = "Draymond Green"
+durant$name = "Kevin Durant"
+klay$name = "Klay Thompson"
+
+curry_made <- length(curry$shot_made_flag[curry$shot_made_flag == "y"])
+curry_total <- length(curry$shot_made_flag)
+curry_perc_made <- curry_made / curry_total
+
+curry_2pt_shots <- length(which(curry$shot_type == "2PT Field Goal"))
+curry_made_2pt_shots <- length(which(curry$shot_type == "2PT Field Goal" & curry$shot_made_flag == "y"))
+curry_perc_2pt <- curry_made_2pt_shots / curry_2pt_shots
+
+curry_3pt_shots <- length(which(curry$shot_type == "3PT Field Goal"))
+curry_made_3pt_shots <- length(which(curry$shot_type == "3PT Field Goal" & curry$shot_made_flag == "y"))
+curry_perc_3pt <- curry_made_3pt_shots / curry_3pt_shots
+
+
+durant_made <- length(durant$shot_made_flag[durant$shot_made_flag == "y"])
+durant_total <- length(durant$shot_made_flag)
+durant_perc_made <- durant_made / durant_total
+
+durant_2pt_shots <- length(which(durant$shot_type == "2PT Field Goal"))
+durant_made_2pt_shots <- length(which(durant$shot_type == "2PT Field Goal" & durant$shot_made_flag == "y"))
+durant_perc_2pt <- durant_made_2pt_shots / durant_2pt_shots
+
+durant_3pt_shots <- length(which(durant$shot_type == "3PT Field Goal"))
+durant_made_3pt_shots <- length(which(durant$shot_type == "3PT Field Goal" & durant$shot_made_flag == "y"))
+durant_perc_3pt <- durant_made_3pt_shots / durant_3pt_shots
+
+
+klay_made <- length(klay$shot_made_flag[klay$shot_made_flag == "y"])
+klay_total <- length(klay$shot_made_flag)
+klay_perc_made <- klay_made / klay_total
+
+klay_2pt_shots <- length(which(klay$shot_type == "2PT Field Goal"))
+klay_made_2pt_shots <- length(which(klay$shot_type == "2PT Field Goal" & klay$shot_made_flag == "y"))
+klay_perc_2pt <- klay_made_2pt_shots / klay_2pt_shots
+
+klay_3pt_shots <- length(which(klay$shot_type == "3PT Field Goal"))
+klay_made_3pt_shots <- length(which(klay$shot_type == "3PT Field Goal" & klay$shot_made_flag == "y"))
+klay_perc_3pt <- klay_made_3pt_shots / klay_3pt_shots
+
+
+green_made <- length(green$shot_made_flag[green$shot_made_flag == "y"])
+green_total <- length(green$shot_made_flag)
+green_perc_made <- green_made / green_total
+
+green_2pt_shots <- length(which(green$shot_type == "2PT Field Goal"))
+green_made_2pt_shots <- length(which(green$shot_type == "2PT Field Goal" & green$shot_made_flag == "y"))
+green_perc_2pt <- green_made_2pt_shots / green_2pt_shots
+
+green_3pt_shots <- length(which(green$shot_type == "3PT Field Goal"))
+green_made_3pt_shots <- length(which(green$shot_type == "3PT Field Goal" & green$shot_made_flag == "y"))
+green_perc_3pt <- green_made_3pt_shots / green_3pt_shots
+
+
+iggy_made <- length(iggy$shot_made_flag[iggy$shot_made_flag == "y"])
+iggy_total <- length(iggy$shot_made_flag)
+iggy_perc_made <- iggy_made / iggy_total
+
+iggy_2pt_shots <- length(which(iggy$shot_type == "2PT Field Goal"))
+iggy_made_2pt_shots <- length(which(iggy$shot_type == "2PT Field Goal" & iggy$shot_made_flag == "y"))
+iggy_perc_2pt <- iggy_made_2pt_shots / iggy_2pt_shots
+
+iggy_3pt_shots <- length(which(iggy$shot_type == "3PT Field Goal"))
+iggy_made_3pt_shots <- length(which(iggy$shot_type == "3PT Field Goal" & iggy$shot_made_flag == "y"))
+iggy_perc_3pt <- iggy_made_3pt_shots / iggy_3pt_shots
+
+
+name <- c("Stephen Curry", "Kevin Durant", "Klay Thompson", "Draymond Green", "Andre Igoudala")
+total <- c(curry_total, durant_total, klay_total, green_total, iggy_total)
+made <- c(curry_made, durant_made, klay_made, green_made, iggy_made)
+perc_made <- c(curry_perc_made, durant_perc_made, klay_perc_made, green_perc_made, iggy_perc_made)
+
+total_2 <- c(curry_2pt_shots, durant_2pt_shots, klay_2pt_shots, green_2pt_shots, iggy_2pt_shots)
+made_2 <- c(curry_made_2pt_shots, durant_made_2pt_shots, klay_made_2pt_shots, green_made_2pt_shots, iggy_made_2pt_shots)
+perc_made_2 <- c(curry_perc_2pt, durant_perc_2pt, klay_perc_2pt, green_perc_2pt, iggy_perc_2pt)
+
+total_3 <- c(curry_3pt_shots, durant_3pt_shots, klay_3pt_shots, green_3pt_shots, iggy_3pt_shots)
+made_3 <- c(curry_made_3pt_shots, durant_made_3pt_shots, klay_made_3pt_shots, green_made_3pt_shots, iggy_made_3pt_shots)
+perc_made_3 <- c(curry_perc_3pt, durant_perc_3pt, klay_perc_3pt, green_perc_3pt, iggy_perc_3pt)
+
+e_shooting <- data.frame("name" = name, "total" = total, "made" = made, "perc_made" = perc_made) %>% arrange(desc(perc_made))
+e_shooting_2pt <- data.frame("name" = name, "total" = total_2, "made" = made_2, "perc_made" = perc_made_2) %>% arrange(desc(perc_made))
+e_shooting_3pt <- data.frame("name" = name, "total" = total_3, "made" = made_3, "perc_made" = perc_made_3) %>% arrange(desc(perc_made))
+```
+The Golden State Warriors have become one of the NBA's premier dynasties, a team that has been compared to some of the greatest of all time. That's what winning 73 games in one season, and capturing three NBA championships in four years will do for you. Along with having two former MVPs on the roster in the homegrown Stephen Curry and the superstar free agent signing Kevin Durant, the Warriors have a compelling case not only for the greatest team of all time but also the most talented team of all time. All stars guard Klay Thompson and forward Draymond Green are also featured in Golden State's starting lineup, and talented veteran role players like Andre Igoudala and Shaun Livingston are a tremendous part of what makes the machine go in Oakland. 
+
+It is natural to ask why this has happened to Golden State specifically. What about the players and their skillsets come together so effortlessly to produce some of the best basketball we've ever seen? Of course, having the two former MVPs is undoutedbly a massive help, but is there anything we can single out in terms of acutal basketball play on the court to attempt to explain their transcendent greatness? The answer is simple - the efficiency and volume with which the Golden State Warriors shoot the ball has no other parallel to any other sqaud in NBA history. The success of a so-called "shooting team" completely contradicts what was previously thought about playoff basketball - that teams overly reliant on shooting can't win championships because defense gets tougher and the game gets slower in the playoffs. However, the magical shooting talent on the roster has transcended this conventional thought and has created arguably the best NBA team ever, and we will see this in this report.
+
+### Golden State's Shot Profile
