@@ -1,3 +1,16 @@
+## ------
+##
+## Make Shots
+##
+## Script to combine five warriors player shots into one facetted shot chart
+##
+## Input: CSV for each player, one row for each shot
+##        (five CSVs total)
+##
+## Output: 5 invidiual shot charts(pdf), one facetted short chart(pdf, png)
+## ------
+
+
 setwd("C:/Users/Dev Navani/Desktop/stat133/workouts/workout01/code")
 curry <- read.csv("../data/stephen-curry.csv", stringsAsFactors = FALSE)
 iggy <- read.csv("../data/andre-iguodala.csv", stringsAsFactors = FALSE)
