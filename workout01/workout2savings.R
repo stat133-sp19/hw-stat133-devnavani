@@ -38,7 +38,7 @@ ui <- fluidPage(
                                "Growth Rate (%)",
                                min = 0,
                                max = 20,
-                               value = 5,
+                               value = 2,
                                step = 0.1)),
             column(4, sliderInput("bins",
                                   "Years:",
