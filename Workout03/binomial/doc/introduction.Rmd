@@ -1,0 +1,67 @@
+---
+title: "Getting Started with binomial"
+author: "Dev Navani"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to binomial}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(collapse = T, comment = "#>")
+library(binomial)
+```
+
+## Creating a binomial distribution model
+
+To create a `"bindis"`, or binomial distribution object, you can use the function `bin_distribution()`. To do so, you need two inputs: 1) the number of trials, and 2) the probability of success.
+
+```{r}
+bindis <- bin_distribution(10, 0.5)
+```
+
+Here, we have created a model with trials equal to 10 and the probability of success equal to 0.5.
+
+```{r}
+bindis
+```
+
+The resulting object yields a data frame with two columns: number of successes and the associated probability of that event happening.
+
+
+## Summary statistics
+
+To find the summary statistics of certain binomial random variable, you will need to create another object called `"binvar"`.
+
+```{r}
+binvar <- bin_variable(10, 0.5)
+binvar
+```
+
+Listed above are the supported summary stastistics for each specified binomial random variable (mean, variance, mode, skewness, kurtosis).
+
+## Cumulative model
+
+The `"bincum"` object is the same thing as the `"bindis"` object, except it keeps a cumulative column in its data frame as the number of successess are increased. 
+
+```{r}
+bincum <- bin_cumulative(10, 0.5)
+bincum
+```
+
+
+## Plotting
+
+Both the `"bindis"` and the `"bincum"` objects come with their own useful plotting functions, and their usage and output is displated below.
+
+```{r}
+bindis <- bin_distribution(10, 0.5)
+plot(bindis)
+```
+
+```{r}
+bincum <- bin_cumulative(10, 0.5)
+plot(bincum)
+```

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Dev Navani" />
+
+<meta name="date" content="2019-05-03" />
+
+<title>Getting Started with binomial</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Getting Started with binomial</h1>
+<h4 class="author"><em>Dev Navani</em></h4>
+<h4 class="date"><em>2019-05-03</em></h4>
+
+
+
+<div id="creating-a-binomial-distribution-model" class="section level2">
+<h2>Creating a binomial distribution model</h2>
+<p>To create a <code>&quot;bindis&quot;</code>, or binomial distribution object, you can use the function <code>bin_distribution()</code>. To do so, you need two inputs: 1) the number of trials, and 2) the probability of success.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bindis &lt;-<span class="st"> </span><span class="kw">bin_distribution</span>(<span class="dv">10</span>, <span class="fl">0.5</span>)</code></pre></div>
+<p>Here, we have created a model with trials equal to 10 and the probability of success equal to 0.5.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bindis
+<span class="co">#&gt; $success</span>
+<span class="co">#&gt;  [1]  0  1  2  3  4  5  6  7  8  9 10</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $probability</span>
+<span class="co">#&gt;  [1] 0.0009765625 0.0097656250 0.0439453125 0.1171875000 0.2050781250</span>
+<span class="co">#&gt;  [6] 0.2460937500 0.2050781250 0.1171875000 0.0439453125 0.0097656250</span>
+<span class="co">#&gt; [11] 0.0009765625</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; attr(,&quot;class&quot;)</span>
+<span class="co">#&gt; [1] &quot;bindis&quot;</span>
+<span class="co">#&gt; attr(,&quot;row.names&quot;)</span>
+<span class="co">#&gt;  [1]  1  2  3  4  5  6  7  8  9 10 11</span>
+<span class="co">#&gt; attr(,&quot;data&quot;)</span>
+<span class="co">#&gt;    success  probability</span>
+<span class="co">#&gt; 1        0 0.0009765625</span>
+<span class="co">#&gt; 2        1 0.0097656250</span>
+<span class="co">#&gt; 3        2 0.0439453125</span>
+<span class="co">#&gt; 4        3 0.1171875000</span>
+<span class="co">#&gt; 5        4 0.2050781250</span>
+<span class="co">#&gt; 6        5 0.2460937500</span>
+<span class="co">#&gt; 7        6 0.2050781250</span>
+<span class="co">#&gt; 8        7 0.1171875000</span>
+<span class="co">#&gt; 9        8 0.0439453125</span>
+<span class="co">#&gt; 10       9 0.0097656250</span>
+<span class="co">#&gt; 11      10 0.0009765625</span></code></pre></div>
+<p>The resulting object yields a data frame with two columns: number of successes and the associated probability of that event happening.</p>
+</div>
+<div id="summary-statistics" class="section level2">
+<h2>Summary statistics</h2>
+<p>To find the summary statistics of certain binomial random variable, you will need to create another object called <code>&quot;binvar&quot;</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">binvar &lt;-<span class="st"> </span><span class="kw">bin_variable</span>(<span class="dv">10</span>, <span class="fl">0.5</span>)
+binvar
+<span class="co">#&gt; Binomal variable</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Paramters</span>
+<span class="co">#&gt; - number of trials:  10</span>
+<span class="co">#&gt; - prob of success:  0.5</span></code></pre></div>
+<p>Listed above are the supported summary stastistics for each specified binomial random variable (mean, variance, mode, skewness, kurtosis).</p>
+</div>
+<div id="cumulative-model" class="section level2">
+<h2>Cumulative model</h2>
+<p>The <code>&quot;bincum&quot;</code> object is the same thing as the <code>&quot;bindis&quot;</code> object, except it keeps a cumulative column in its data frame as the number of successess are increased.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bincum &lt;-<span class="st"> </span><span class="kw">bin_cumulative</span>(<span class="dv">10</span>, <span class="fl">0.5</span>)
+bincum
+<span class="co">#&gt; $success</span>
+<span class="co">#&gt;  [1]  0  1  2  3  4  5  6  7  8  9 10</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $prob</span>
+<span class="co">#&gt;  [1] 0.0009765625 0.0097656250 0.0439453125 0.1171875000 0.2050781250</span>
+<span class="co">#&gt;  [6] 0.2460937500 0.2050781250 0.1171875000 0.0439453125 0.0097656250</span>
+<span class="co">#&gt; [11] 0.0009765625</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $cumulative</span>
+<span class="co">#&gt;  [1] 0.0009765625 0.0107421875 0.0546875000 0.1718750000 0.3769531250</span>
+<span class="co">#&gt;  [6] 0.6230468750 0.8281250000 0.9453125000 0.9892578125 0.9990234375</span>
+<span class="co">#&gt; [11] 1.0000000000</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; attr(,&quot;class&quot;)</span>
+<span class="co">#&gt; [1] &quot;bincum&quot;</span>
+<span class="co">#&gt; attr(,&quot;row.names&quot;)</span>
+<span class="co">#&gt;  [1]  1  2  3  4  5  6  7  8  9 10 11</span>
+<span class="co">#&gt; attr(,&quot;l&quot;)</span>
+<span class="co">#&gt; [1] 10</span>
+<span class="co">#&gt; attr(,&quot;data&quot;)</span>
+<span class="co">#&gt;    success         prob   cumulative</span>
+<span class="co">#&gt; 1        0 0.0009765625 0.0009765625</span>
+<span class="co">#&gt; 2        1 0.0097656250 0.0107421875</span>
+<span class="co">#&gt; 3        2 0.0439453125 0.0546875000</span>
+<span class="co">#&gt; 4        3 0.1171875000 0.1718750000</span>
+<span class="co">#&gt; 5        4 0.2050781250 0.3769531250</span>
+<span class="co">#&gt; 6        5 0.2460937500 0.6230468750</span>
+<span class="co">#&gt; 7        6 0.2050781250 0.8281250000</span>
+<span class="co">#&gt; 8        7 0.1171875000 0.9453125000</span>
+<span class="co">#&gt; 9        8 0.0439453125 0.9892578125</span>
+<span class="co">#&gt; 10       9 0.0097656250 0.9990234375</span>
+<span class="co">#&gt; 11      10 0.0009765625 1.0000000000</span></code></pre></div>
+</div>
+<div id="plotting" class="section level2">
+<h2>Plotting</h2>
+<p>Both the <code>&quot;bindis&quot;</code> and the <code>&quot;bincum&quot;</code> objects come with their own useful plotting functions, and their usage and output is displated below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bindis &lt;-<span class="st"> </span><span class="kw">bin_distribution</span>(<span class="dv">10</span>, <span class="fl">0.5</span>)
+<span class="kw">plot</span>(bindis)</code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bincum &lt;-<span class="st"> </span><span class="kw">bin_cumulative</span>(<span class="dv">10</span>, <span class="fl">0.5</span>)
+<span class="kw">plot</span>(bincum)
+<span class="co">#&gt;    success         prob   cumulative</span>
+<span class="co">#&gt; 1        0 0.0009765625 0.0009765625</span>
+<span class="co">#&gt; 2        1 0.0097656250 0.0107421875</span>
+<span class="co">#&gt; 3        2 0.0439453125 0.0546875000</span>
+<span class="co">#&gt; 4        3 0.1171875000 0.1718750000</span>
+<span class="co">#&gt; 5        4 0.2050781250 0.3769531250</span>
+<span class="co">#&gt; 6        5 0.2460937500 0.6230468750</span>
+<span class="co">#&gt; 7        6 0.2050781250 0.8281250000</span>
+<span class="co">#&gt; 8        7 0.1171875000 0.9453125000</span>
+<span class="co">#&gt; 9        8 0.0439453125 0.9892578125</span>
+<span class="co">#&gt; 10       9 0.0097656250 0.9990234375</span>
+<span class="co">#&gt; 11      10 0.0009765625 1.0000000000</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
