@@ -12,12 +12,12 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
-# binomial
+# Overview
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of binomial is to ...
+`"Binomial"` is a R package that implements functions for calculating probabilities of a binomial random variable. It also allows for related calculations such as the probability distributuion, the expected value, the variance, and more.
 
 ## Installation
 
@@ -26,20 +26,52 @@ You can install the released version of binomial from [CRAN](https://CRAN.R-proj
 ``` r
 install.packages("binomial")
 ```
+The devlopment version is installed by:
 
+``` r
+install.packages("devtools")
+devtools::install_github("stat133-sp19/hw-stat133-devnavani/blob/master/Workout03/binomial")
 ```
+
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This is a basic example which shows you create a new binomial random variable.
 
 ```{r example}
 library(binomial)
-## basic example code
+newRV = bin_variable(10, 0.5)
+newRV
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+The summary statistics of this random variable can be found as well using the summary function.
+
+```{r}
+sum = summary(newRV)
+sum
+```
+
+
+## Plotting and Tables
+
+To make tables and plots representing a random variable, another class and function will be needed (one of bindis or bincum).
 
 ```{r cars}
-summary(cars)
+newRV = bin_distribution(10, 0.5)
+df <- attr(newRV, "data")
+df
+```
+
+```{r}
+plot(newRV)
+```
+
+```{r}
+newRV = bin_cumulative(10, 0.5)
+df <- attr(newRV, "data")
+df
+```
+
+```{r}
+plot(newRV)
 ```
 

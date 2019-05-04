@@ -21,7 +21,7 @@ bin_variable <- function(trials, prob) {
 print.binvar <- function(binvar1) {
   trials = attr(binvar1, "trials")
   prob = attr(binvar1, "prob")
-  cat('Binomal variable\n\n')
+  cat('Binomial variable\n\n')
   cat('Paramters\n')
   cat('- number of trials: ', trials)
   cat('\n')
@@ -39,6 +39,15 @@ summary.binvar <- function(binvar1) {
                  mode = aux_mode(trials, prob),
                  skewness = aux_skewness(trials, prob),
                  kurtosis = aux_kurtosis(trials, prob))
+  attr(object, "trials") <- trials
+  attr(object, "prob") <- prob
+  attr(object, "mean") <- aux_mean(trials, prob)
+  attr(object, "variance") <- aux_variance(trials, prob)
+  attr(object, "mode") <- aux_mode(trials, prob)
+  attr(object, "skewness") <- aux_skewness(trials, prob)
+  attr(object, "kurtosis") <- aux_kurtosis(trials, prob)
+  class(object) <- "summary.binvar"
+  object
 }
 
 #' @export
@@ -48,15 +57,15 @@ print.summary.binvar <- function(binvar1) {
   print.binvar(binvar1)
   cat('\n\n')
   cat('Measures\n\n')
-  cat('- mean:')
+  cat('- mean: ')
   cat(aux_mean(trials, prob))
-  cat('\n- variance:')
+  cat('\n- variance: ')
   cat(aux_variance(trials, prob))
-  cat('\n- mode:')
+  cat('\n- mode: ')
   cat(aux_mode(trials, prob))
-  cat('\n- skewness:')
+  cat('\n- skewness: ')
   cat(aux_skewness(trials, prob))
-  cat('\n- kurtosis:')
+  cat('\n- kurtosis: ')
   cat(aux_kurtosis(trials, prob))
 }
 
